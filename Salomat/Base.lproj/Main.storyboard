@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rCA-Zr-OI8">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="ooD-7o-TpP">
+            <objects>
+                <tabBarController storyboardIdentifier="TabBarController" id="rCA-Zr-OI8" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ZJf-db-ssY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="selectedImageTintColor" name="violet"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Uff-5H-Hsd" kind="relationship" relationship="viewControllers" id="Zd4-XF-2nj"/>
+                        <segue destination="O2p-g4-Fjh" kind="relationship" relationship="viewControllers" id="L2p-eA-JIK"/>
+                        <segue destination="TWP-H3-Zz5" kind="relationship" relationship="viewControllers" id="Krx-my-6G2"/>
+                        <segue destination="aZI-xs-nGH" kind="relationship" relationship="viewControllers" id="ZvS-Ez-YGY"/>
+                        <segue destination="StZ-jM-xKc" kind="relationship" relationship="viewControllers" id="wyO-G2-hIl"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KEZ-6o-Dom" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9" y="-1094"/>
+        </scene>
+        <!--Избранное-->
+        <scene sceneID="fZe-5i-QDA">
+            <objects>
+                <navigationController id="O2p-g4-Fjh" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Избранное" image="iconHeart" selectedImage="inactive.heart" id="5gW-OG-6WN" customClass="TabBarItem" customModule="Salomat" customModuleProvider="target"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EXB-0S-4pt">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="hHy-M7-vkj" kind="relationship" relationship="rootViewController" id="mML-K1-bRv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ttm-gt-kLp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-833" y="-327"/>
+        </scene>
+        <!--Корзина-->
+        <scene sceneID="rhs-d1-FE0">
+            <objects>
+                <navigationController id="aZI-xs-nGH" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Корзина" image="trash can" selectedImage="inactive.icon 1" id="psE-LX-0ip" customClass="TabBarItem" customModule="Salomat" customModuleProvider="target"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hzv-2k-U5C">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="YDg-lz-cAX" kind="relationship" relationship="rootViewController" id="y9O-sh-KvN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g4F-o6-pSJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="851" y="-327"/>
+        </scene>
+        <!--Главная-->
+        <scene sceneID="kTe-JL-feO">
+            <objects>
+                <navigationController id="Uff-5H-Hsd" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Главная" image="logo1" selectedImage="logo 1" id="j5d-nD-2KL" customClass="TabBarItem" customModule="Salomat" customModuleProvider="target">
+                        <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xfN-cg-Que">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="HhX-39-eRc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="59z-vE-72P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1648" y="-327"/>
+        </scene>
+        <!--Профиль-->
+        <scene sceneID="O3x-P3-1ej">
+            <objects>
+                <navigationController id="StZ-jM-xKc" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Профиль" image="profile" selectedImage="inactive.profile" id="lhd-7C-KaL" customClass="TabBarItem" customModule="Salomat" customModuleProvider="target"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mAg-NA-Xg5">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="sD0-hV-e1u" kind="relationship" relationship="rootViewController" id="BGw-d1-UXv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="evu-i2-6Sj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1701" y="-327"/>
+        </scene>
+        <!--э-Рецепт-->
+        <scene sceneID="vqN-Sh-rfP">
+            <objects>
+                <navigationController id="TWP-H3-Zz5" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="э-Рецепт" image="camera" selectedImage="camera selected" id="MLw-mv-a6Y" customClass="TabBarItem" customModule="Salomat" customModuleProvider="target"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Poi-S4-wWc">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="qwe-eg-bTJ" kind="relationship" relationship="rootViewController" id="DLN-QJ-VBp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UF7-Gi-qdc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="10" y="-327"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="Salomat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="PQh-I8-rX5">
+                        <barButtonItem key="rightBarButtonItem" image="Search" id="mf1-z8-I5H"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1649.2307692307693" y="430.80568720379142"/>
+        </scene>
+        <!--Medicines View Controller-->
+        <scene sceneID="Odn-rI-x1f">
+            <objects>
+                <viewController storyboardIdentifier="MedicinesViewController" id="RQG-e3-8ig" customClass="MedicinesViewController" customModule="Salomat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="A8C-SO-7Ry">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="C9m-53-MFK"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oau-Pi-Izk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1649" y="1140"/>
+        </scene>
+        <!--Search View Controller-->
+        <scene sceneID="Nta-4Z-Ccw">
+            <objects>
+                <viewController id="DKo-v2-siz" customClass="SearchViewController" customModule="Salomat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fz2-rm-FCl">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="nWT-bO-jFK"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="8Cj-MQ-JYw"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XKD-Ku-LVo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="156.92307692307691" y="1145.9715639810427"/>
+        </scene>
+        <!--Favorites View Controller-->
+        <scene sceneID="gf1-fB-g2V">
+            <objects>
+                <viewController id="hHy-M7-vkj" customClass="FavoritesViewController" customModule="Salomat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tdN-8N-qSf">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="GKL-nZ-nc7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="1HV-HO-ewD">
+                        <barButtonItem key="backBarButtonItem" title=" " id="TVl-aB-C8f"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mqd-rE-tUg" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-833" y="431"/>
+        </scene>
+        <!--Receipt View Controller-->
+        <scene sceneID="Uc9-af-mom">
+            <objects>
+                <viewController id="qwe-eg-bTJ" customClass="ReceiptViewController" customModule="Salomat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="L2y-pm-7vV">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qfb-eg-Cso">
+                                <rect key="frame" x="184" y="282" width="24" height="14"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button">
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="0.0"/>
+                                </buttonConfiguration>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q4S-48-iSq">
+                                <rect key="frame" x="185" y="380" width="24" height="14"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Buttondjn">
+                                    <fontDescription key="titleFontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="0.0"/>
+                                </buttonConfiguration>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8M0-QE-kJQ">
+                                <rect key="frame" x="126" y="423" width="121" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button">
+                                    <fontDescription key="titleFontDescription" name="NotoSansKannada-Bold" family="Noto Sans Kannada" pointSize="30"/>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="xdy-D6-g3F"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="HFp-FX-hsZ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uTK-bR-Bvi" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7.6923076923076916" y="430.80568720379142"/>
+        </scene>
+        <!--Cart View Controller-->
+        <scene sceneID="HI5-DA-G41">
+            <objects>
+                <viewController id="YDg-lz-cAX" customClass="CartViewController" customModule="Salomat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="28b-0e-CiX">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="wvn-Rj-KdU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="a2F-iQ-KIP"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CEv-Xc-R6b" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="850.72463768115949" y="430.58035714285711"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="hzz-Q4-PQ7">
+            <objects>
+                <viewController id="sD0-hV-e1u" customClass="ProfileViewController" customModule="Salomat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kc5-4R-hSM">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="hXq-Ve-0vR"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="fme-79-TGq"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vvu-o9-1C0" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1700" y="431"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VKr-UX-kV5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bir-Tk-HUw" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1KZ-SK-oki">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="DKo-v2-siz" kind="relationship" relationship="rootViewController" id="Jcj-Y5-hq9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DEd-8p-3yY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-772.30769230769226" y="1145.9715639810427"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Search" width="24" height="24"/>
+        <image name="camera" width="24" height="24"/>
+        <image name="camera selected" width="24" height="18"/>
+        <image name="iconHeart" width="24" height="24"/>
+        <image name="inactive.heart" width="24" height="24"/>
+        <image name="inactive.icon 1" width="24" height="24"/>
+        <image name="inactive.profile" width="24" height="24"/>
+        <image name="logo 1" width="23" height="23"/>
+        <image name="logo1" width="24" height="24"/>
+        <image name="profile" width="24" height="24"/>
+        <image name="trash can" width="24" height="24"/>
+        <namedColor name="violet">
+            <color red="0.2199999988079071" green="0.20800000429153442" blue="0.32499998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

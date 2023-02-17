@@ -1,0 +1,18 @@
+
+/* Class = "UITabBarItem"; title = "Избранное"; ObjectID = "5gW-OG-6WN"; */
+"5gW-OG-6WN.title" = "Избранное";
+
+/* Class = "UITabBarItem"; title = "э-Рецепт"; ObjectID = "MLw-mv-a6Y"; */
+"MLw-mv-a6Y.title" = "э-Рецепт";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "TVl-aB-C8f"; */
+"TVl-aB-C8f.title" = " ";
+
+/* Class = "UITabBarItem"; title = "Главная"; ObjectID = "j5d-nD-2KL"; */
+"j5d-nD-2KL.title" = "Главная";
+
+/* Class = "UITabBarItem"; title = "Профиль"; ObjectID = "lhd-7C-KaL"; */
+"lhd-7C-KaL.title" = "Профиль";
+
+/* Class = "UITabBarItem"; title = "Корзина"; ObjectID = "psE-LX-0ip"; */
+"psE-LX-0ip.title" = "Корзина";

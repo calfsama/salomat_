@@ -1,0 +1,6 @@
+framework module Pods_Salomat {
+  umbrella header "Pods-Salomat-umbrella.h"
+
+  export *
+  module * { export * }
+}
