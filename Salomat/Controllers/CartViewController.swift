@@ -178,7 +178,6 @@ extension CartViewController: UICollectionViewDelegate, UICollectionViewDataSour
             footer.cost.text = String(format: "%.2f", calculateCartTotalWithoutDelivery()) + " сом"
             footer.delivery.text = "5.00" + " сом"
             footer.totalCost.text = String(format: "%.2f", calculateCartTotalWithDelivery()) + " сом"
-            collectionView.collectionViewLayout.invalidateLayout()
             footer.configure()
             return footer
              

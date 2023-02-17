@@ -428,11 +428,7 @@ extension ReceiptViewController: UICollectionViewDelegate, UICollectionViewDataS
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedimage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             imagesArray += [pickedimage]
-            print("hello", pickedimage.pngData())
-            for var i in 0...imagesArray.count - 1 {
-                print("qwerty", imagesArray[i])
-                i += 1
-            }
+            print("pickedImage", pickedimage.pngData())
             receiptCollectionView.reloadData()
         }
         else {
