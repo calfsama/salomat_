@@ -71,20 +71,13 @@ class ReceiptViewController: UIViewController, UICollectionViewDelegateFlowLayou
     }
     
      func uploadImage() {
-         print("pressed")
-        //let imageData: Data = image.image!.pngData()!
-        //let imageStr: String = imageData.base64EncodedString()
-         let boundary = UUID().uuidString
-         //let imageData = image.image!.pngData()
          var imagesStr = [String]()
          for i in 0...imagesArray.count - 1 {
              let imageData: Data = imagesArray[i].jpegData(compressionQuality: 1)!
              imagesStr.append(imageData.base64EncodedString())
          }
-         //let urlString: String = "imageStr=" + imageData
-         let url = URL(string: "/recipes/store")
+         let url = URL(string: "http://www.374315-ca17278.tmweb.ru/recipes/store")
          var request = URLRequest(url: url!)
-         //request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
          request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
          request.httpMethod = "POST"
          let parameters: [String: Any] = [
@@ -173,10 +166,6 @@ class ReceiptViewController: UIViewController, UICollectionViewDelegateFlowLayou
     @objc func didTapButton() {
         print("pressed1")
         showAlert(with: "Рецепт отправлен", message: "", on: self)
-        let reg = MainTabBarViewController()
-        reg.selectedIndex = 4
-        let appDelegate = UIApplication.shared.delegate
-        appDelegate?.window??.rootViewController = reg
         uploadImage()
        
     }
@@ -185,6 +174,10 @@ class ReceiptViewController: UIViewController, UICollectionViewDelegateFlowLayou
         self.alert = UIAlertController(title: "", message: "Заполните поля", preferredStyle: UIAlertController.Style.alert)
         self.present(self.alert, animated: true, completion: nil)
         Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(dismissAlert), userInfo: nil, repeats: false)
+        let reg = MainTabBarViewController()
+        reg.selectedIndex = 4
+        let appDelegate = UIApplication.shared.delegate
+        appDelegate?.window??.rootViewController = reg
     }
 
     @objc func dismissAlertController(){

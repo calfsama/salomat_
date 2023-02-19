@@ -17,8 +17,10 @@ pod 'TinyConstraints'
 pod 'Locksmith'
 pod 'SwiftKeychainWrapper'
 pod 'KeychainAccess'
-pod 'Alamofire'
 pod 'Kingfisher'
+pod 'FirebaseAnalytics'
+pod 'FirebaseMessaging'
+pod 'PocketSVG'
 end
 
 deployment_target = '11.0'

@@ -68,7 +68,17 @@ struct Sub_Categ: Codable {
 }
 
 struct CategoryProduct: Codable {
+    var pages: [Page]
     var products: [ShowProducts]
+}
+
+struct Page: Codable {
+    var page: Int?
+    var current_page: String?
+    var total_pages: Int?
+    var base_url: String?
+    var link: String?
+    var current: String?
 }
 
 struct ShowProducts: Codable {

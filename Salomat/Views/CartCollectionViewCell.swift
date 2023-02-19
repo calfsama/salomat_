@@ -137,82 +137,11 @@ class CartCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-     func removeFromCart() {
-        let object: NSFetchRequest <DataModel> = DataModel.fetchRequest()
-        object.predicate = commitPredicate
-        commitPredicate = NSPredicate(format: "title == %@", titleMedicine)
-        do {
-            let object = try context.fetch(object)
-            for i in object {
-                context.delete(i)
-            }
-            do {
-                try context.save()
-            }
-            catch {
-                print("Error \(error)")
-            }
-        }
-        catch {
-            print("Error \(error)")
-        }
-    }
-    
     @objc func update() {
         stepperValue.text = "\(Int(stepper.value))"
-        test()
+        updatePrice()
     }
-    
-     func calculate() -> Double{
-        var total = 0.0
-        if self.dataModel.count > 0 {
-            for index in 0...self.dataModel.count - 1 {
-                total += (Double(dataModel[index].price!)  ?? 0 * Double(stepperValue.text!)!)
-                
-            }
-        }
-        return total + 5
-    }
-    
-     func buttonAction() {
-        let fetchRequest: NSFetchRequest <Basket> = Basket.fetchRequest()
-        commitPredicate = NSPredicate(format: "id == %@", id)
-        fetchRequest.predicate = commitPredicate
-        do{
-            let data = try context.fetch(fetchRequest).first
-                print("save")
-                saveMedicineInBasket()
-        }
-        catch {
-            print("Error1\(error)")
-        }
-    }
-    
-    func saveMedicineInBasket() {
-        let data = Basket(context: self.context)
-        data.amount = String(stepper.value)
-        self.dataModel.append(data)
-        print("ischecked")
-       do {
-           try context.save()
-       }catch {
-           print("Error saving context \(error)")
-       }
-    }
-    
-    func calculateCartTotalWithDelivery1() -> Double{
-        var total = 0.0
-        let productPrice = Double(self.prices)
-        if self.dataModel.count > 0 {
-            for index in 0...self.dataModel.count - 1 {
-                total += (Double(dataModel[index].price ?? "") ?? 0) * (productPrice! * Double(stepperValue.text!)!)
-                
-            }
-        }
-        return total + 5
-    }
-    
-    func deleteMedicineInBasket() {
+    func updateAmount() {
         let object: NSFetchRequest <Basket> = Basket.fetchRequest()
         commitPredicate = NSPredicate(format: "id == %@", id)
         object.predicate = commitPredicate
@@ -221,7 +150,6 @@ class CartCollectionViewCell: UICollectionViewCell {
             for i in object {
                 if i.id == id {
                     i.amount = stepperValue.text
-                    print(i.amount)
                 }
                 do {
                     try context.save()
@@ -235,54 +163,13 @@ class CartCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func test() {
-        if self.stepper.value >= 1 {
-            let productPrice = Double(self.prices)
-            price.text = String(format: "%.2f", productPrice! * Double(stepperValue.text!)!) + " сом"
-            deleteMedicineInBasket()
-        }
-    }
-    
     func updatePrice() {
         if self.stepper.value >= 1 {
             let productPrice = Double(self.prices)
-            price.text = String(productPrice! * Double(stepperValue.text!)!) + " сом"
-            
-            let object: NSFetchRequest <Basket> = Basket.fetchRequest()
-            commitPredicate = NSPredicate(format: "id == %@", id)
-            object.predicate = commitPredicate
-            do {
-                let i = try context.fetch(object).first
-                i?.amount = String(stepper.value)
-                i?.price = String(productPrice! * Double(stepperValue.text!)!)
-                do {
-                    try context.save()
-                    print(i?.amount, "amount")
-                }catch {
-                    print("Error saving context \(error)")
-                }
-            }
-            catch {
-                print("Error2 \(error)")
-            }
-        }
-        else {
-            print("errrror")
+            price.text = String(format: "%.2f", productPrice! * Double(stepperValue.text!)!) + " сом"
+            updateAmount()
         }
     }
-    
-     func calculateCartTotalWithDelivery() -> Double{
-        var total = 0.0
-        if self.dataModel.count > 0 {
-            for index in 0...self.dataModel.count - 1 {
-                total += ((Double(dataModel[index].price!) ?? 0) * stepper.value)
-                //total = total + 10
-                print(total)
-            }
-        }
-        return total + 10
-    }
-
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
