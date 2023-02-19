@@ -54,9 +54,6 @@
 		97499272295DA54700DC1CC0 /* CategoriesProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97499271295DA54700DC1CC0 /* CategoriesProducts.swift */; };
 		9749928E296D5E1400DC1CC0 /* MainCategoriesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9749928D296D5E1400DC1CC0 /* MainCategoriesCollectionView.swift */; };
 		97499290296D609F00DC1CC0 /* MainCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9749928F296D609F00DC1CC0 /* MainCategoriesViewController.swift */; };
-		97499293296D86FF00DC1CC0 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 97499292296D86FF00DC1CC0 /* FirebaseAnalytics */; };
-		97499295296D86FF00DC1CC0 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 97499294296D86FF00DC1CC0 /* FirebaseMessaging */; };
-		97499298296EAB1800DC1CC0 /* PocketSVG in Frameworks */ = {isa = PBXBuildFile; productRef = 97499297296EAB1800DC1CC0 /* PocketSVG */; };
 		9749929A296EAB8800DC1CC0 /* PocketSVG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97499299296EAB8800DC1CC0 /* PocketSVG.swift */; };
 		9749929E29791BA300DC1CC0 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9749929D29791BA300DC1CC0 /* Notifications.swift */; };
 		974992A029794AE000DC1CC0 /* NotificationNewsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9749929F29794AE000DC1CC0 /* NotificationNewsCollectionView.swift */; };
@@ -296,10 +293,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97499295296D86FF00DC1CC0 /* FirebaseMessaging in Frameworks */,
-				97499293296D86FF00DC1CC0 /* FirebaseAnalytics in Frameworks */,
 				FCA6BE654F5C4BF385F9D315 /* Pods_Salomat.framework in Frameworks */,
-				97499298296EAB1800DC1CC0 /* PocketSVG in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,9 +533,6 @@
 			);
 			name = Salomat;
 			packageProductDependencies = (
-				97499292296D86FF00DC1CC0 /* FirebaseAnalytics */,
-				97499294296D86FF00DC1CC0 /* FirebaseMessaging */,
-				97499297296EAB1800DC1CC0 /* PocketSVG */,
 			);
 			productName = Salomat;
 			productReference = 978973B228C0905200C395C8 /* Salomat.app */;
@@ -572,8 +563,6 @@
 			);
 			mainGroup = 978973A928C0905200C395C8;
 			packageReferences = (
-				97499291296D86FF00DC1CC0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				97499296296EAB1800DC1CC0 /* XCRemoteSwiftPackageReference "PocketSVG" */,
 			);
 			productRefGroup = 978973B328C0905200C395C8 /* Products */;
 			projectDirPath = "";
@@ -1003,43 +992,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		97499291296D86FF00DC1CC0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		97499296296EAB1800DC1CC0 /* XCRemoteSwiftPackageReference "PocketSVG" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pocketsvg/PocketSVG.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		97499292296D86FF00DC1CC0 /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 97499291296D86FF00DC1CC0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		97499294296D86FF00DC1CC0 /* FirebaseMessaging */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 97499291296D86FF00DC1CC0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseMessaging;
-		};
-		97499297296EAB1800DC1CC0 /* PocketSVG */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 97499296296EAB1800DC1CC0 /* XCRemoteSwiftPackageReference "PocketSVG" */;
-			productName = PocketSVG;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		97604F4C28FC231100B44A5C /* Favorites.xcdatamodeld */ = {

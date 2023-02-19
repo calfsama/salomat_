@@ -32,12 +32,6 @@ class FavoritesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         favorites()
-        print(keychain["UserID"])
-        print(collection.test, "tomiris")
-        
-        if keychain["UserID"] ?? "" == "" {
-            
-        }
     }
     
     func configure() {
