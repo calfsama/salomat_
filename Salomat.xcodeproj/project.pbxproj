@@ -19,6 +19,9 @@
 		9722C7E8299CE41B0040F884 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9722C7E7299CE41B0040F884 /* SearchCollectionReusableView.swift */; };
 		9722C7EA299F88A00040F884 /* MyOrdersHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9722C7E9299F88A00040F884 /* MyOrdersHeaderCollectionReusableView.swift */; };
 		9722C7EC299F895B0040F884 /* CatForMainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9722C7EB299F895B0040F884 /* CatForMainPageViewController.swift */; };
+		9722C7EF29A336F30040F884 /* NotifCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9722C7EE29A336F30040F884 /* NotifCollectionViewCell.swift */; };
+		9722C7F129A3375C0040F884 /* NotifViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9722C7F029A3375C0040F884 /* NotifViewController.swift */; };
+		9722C7F329A47C980040F884 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9722C7F229A47C980040F884 /* Images.swift */; };
 		9723BCAF2906ED0100B65237 /* CategoriesForMainPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9723BCAE2906ED0100B65237 /* CategoriesForMainPageCollectionViewCell.swift */; };
 		9723BCB12906ED1C00B65237 /* CategoriesForMainPageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9723BCB02906ED1C00B65237 /* CategoriesForMainPageCollectionView.swift */; };
 		9725796C28E7F24900712EEC /* RecoveryPasswordStepThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9725796B28E7F24900712EEC /* RecoveryPasswordStepThreeViewController.swift */; };
@@ -165,6 +168,9 @@
 		9722C7E7299CE41B0040F884 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
 		9722C7E9299F88A00040F884 /* MyOrdersHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyOrdersHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		9722C7EB299F895B0040F884 /* CatForMainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatForMainPageViewController.swift; sourceTree = "<group>"; };
+		9722C7EE29A336F30040F884 /* NotifCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifCollectionViewCell.swift; sourceTree = "<group>"; };
+		9722C7F029A3375C0040F884 /* NotifViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifViewController.swift; sourceTree = "<group>"; };
+		9722C7F229A47C980040F884 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		9723BCAE2906ED0100B65237 /* CategoriesForMainPageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesForMainPageCollectionViewCell.swift; sourceTree = "<group>"; };
 		9723BCB02906ED1C00B65237 /* CategoriesForMainPageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesForMainPageCollectionView.swift; sourceTree = "<group>"; };
 		9725796B28E7F24900712EEC /* RecoveryPasswordStepThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryPasswordStepThreeViewController.swift; sourceTree = "<group>"; };
@@ -396,6 +402,7 @@
 				97E9586F29545B1B00A90D98 /* Expanding.swift */,
 				974992A1297950D600DC1CC0 /* AboutProjectWebViewController.swift */,
 				9722C7EB299F895B0040F884 /* CatForMainPageViewController.swift */,
+				9722C7F029A3375C0040F884 /* NotifViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -462,6 +469,7 @@
 				97A1E85B299A674100EA03ED /* SubtotalCollectionReusableView.swift */,
 				97A1E85D299A7B0900EA03ED /* GoodsHeaderCollectionReusableView.swift */,
 				9722C7E7299CE41B0040F884 /* SearchCollectionReusableView.swift */,
+				9722C7EE29A336F30040F884 /* NotifCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -492,6 +500,7 @@
 				97499271295DA54700DC1CC0 /* CategoriesProducts.swift */,
 				97499299296EAB8800DC1CC0 /* PocketSVG.swift */,
 				9749929D29791BA300DC1CC0 /* Notifications.swift */,
+				9722C7F229A47C980040F884 /* Images.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -657,6 +666,7 @@
 				9725797228E7F96500712EEC /* ProfileInfoViewController.swift in Sources */,
 				9749493B28E80B0A00793966 /* SettingsCollectionViewCell.swift in Sources */,
 				978973D128C096D500C395C8 /* CartViewController.swift in Sources */,
+				9722C7EF29A336F30040F884 /* NotifCollectionViewCell.swift in Sources */,
 				97E9586A29532A4700A90D98 /* OrderModel.swift in Sources */,
 				97BE27052907908B0071D143 /* Saerch.swift in Sources */,
 				970B06FF28F9190900C57763 /* InfoAboutDeliveryTwoViewController.swift in Sources */,
@@ -682,6 +692,7 @@
 				97604F4B28F9904100B44A5C /* MyOrdersCollectionViewCell.swift in Sources */,
 				97DEFFD729029A4500E6FCD5 /* MyOrdersCollectionReusableView.swift in Sources */,
 				97E9587029545B1B00A90D98 /* Expanding.swift in Sources */,
+				9722C7F329A47C980040F884 /* Images.swift in Sources */,
 				976E326B28D885D400C3E3E7 /* BADCollectionView.swift in Sources */,
 				973A0AE828D47A9A0068CF56 /* BlogCollectionView.swift in Sources */,
 				970B06F928F7CC4F00C57763 /* PhoneNumberViewController.swift in Sources */,
@@ -731,6 +742,7 @@
 				9794790E291CFE6E00C3BC77 /* Favorites.swift in Sources */,
 				9749494828ED877A00793966 /* Show.swift in Sources */,
 				976E326928D880E200C3E3E7 /* VitaminCollectionView.swift in Sources */,
+				9722C7F129A3375C0040F884 /* NotifViewController.swift in Sources */,
 				970B06FD28F834E200C57763 /* InfoAboutDeliveryViewController.swift in Sources */,
 				9747484F2935C8B100903A7A /* ReceiptCollectionReusableView.swift in Sources */,
 				97951DE92948803300177ED3 /* BlogShowViewController.swift in Sources */,

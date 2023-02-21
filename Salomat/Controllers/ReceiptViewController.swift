@@ -14,7 +14,7 @@ class ReceiptViewController: UIViewController, UICollectionViewDelegateFlowLayou
     var alert: UIAlertController!
     var imagesArray: [UIImage] = [
     UIImage(named: "image 6")!]
-    
+
     struct Constants {
         static let backgroundAlphaTo:  CGFloat = 0.6
     }
@@ -68,34 +68,6 @@ class ReceiptViewController: UIViewController, UICollectionViewDelegateFlowLayou
             receiptCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             receiptCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-    }
-    
-     func uploadImage() {
-         var imagesStr = [String]()
-         for i in 0...imagesArray.count - 1 {
-             let imageData: Data = imagesArray[i].jpegData(compressionQuality: 1)!
-             imagesStr.append(imageData.base64EncodedString())
-         }
-         let url = URL(string: "http://www.374315-ca17278.tmweb.ru/recipes/store")
-         var request = URLRequest(url: url!)
-         request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
-         request.httpMethod = "POST"
-         let parameters: [String: Any] = [
-            "recipe_phone": "987305959",
-            "recipe_name": "tom",
-            "recipe_comment": "blah blah blah",
-            "recipe_pics": "\(imagesStr)"
-         ]
-         guard let data = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {
-             return
-         }
-         let dataString: String = String(data: data, encoding: String.Encoding.utf8) ?? ""
-         request.httpBody = dataString.data(using: .utf8)
-         NSURLConnection.sendAsynchronousRequest(request, queue: .main, completionHandler: {(request, data, error) in
-             guard let data = data else { return }
-             let responseString: String = String(data: data, encoding: .utf8)!
-             print("my_log" + responseString)
-         })
     }
     
     
@@ -163,13 +135,6 @@ class ReceiptViewController: UIViewController, UICollectionViewDelegateFlowLayou
         self.backgroundView.removeFromSuperview()
     }
     
-    @objc func didTapButton() {
-        print("pressed1")
-        showAlert(with: "Рецепт отправлен", message: "", on: self)
-        uploadImage()
-       
-    }
-    
     func showAlert() {
         self.alert = UIAlertController(title: "", message: "Заполните поля", preferredStyle: UIAlertController.Style.alert)
         self.present(self.alert, animated: true, completion: nil)
@@ -185,15 +150,66 @@ class ReceiptViewController: UIViewController, UICollectionViewDelegateFlowLayou
         self.alert.dismiss(animated: true, completion: nil)
     }
     
-    @objc func uploadImages() {
-        let imageData = image.image!.pngData()
-        //let urlString: String = "imageStr=" + imageData
-        let url = URL(string: "http://slomat2.colibri.tj/recipes/store")
-        var request = URLRequest(url: url!)
-        //request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
-        request.httpMethod = "POST"
+    
+    func createBodyWithParameters(parameters: [String: Any],boundary: String) -> Data {
+        let body = NSMutableData()
+
+        if parameters != nil {
+            for (key, value) in parameters {
+
+                if(value is String || value is NSString){
+                    body.appendString(string: "--\(boundary)\r\n")
+                    body.appendString(string: "Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+                    body.appendString(string: "\(value)\r\n")
+                }
+                else if(value is [UIImage]){
+                    var i = 0;
+                    for image in value as! [UIImage]{
+                        let filename = "image\(i).jpg"
+                        let data = image.jpegData(compressionQuality: 1);
+                        let mimetype = "image/jpeg"
+
+                        body.appendString(string: "--\(boundary)\r\n")
+                        body.appendString(string: "Content-Disposition: form-data; name=\"\(key)\"; filename=\"\(filename)\"\r\n")
+                        body.appendString(string: "Content-Type: \(mimetype)\r\n\r\n")
+                        body.append(data!)
+                        body.appendString(string: "\r\n")
+                        i += 1
+                    }
+                }
+            }
+        }
+        body.appendString(string: "--\(boundary)--\r\n")
+        return body as Data
     }
+
+    func generateBoundaryString() -> String {
+        return "Boundary-\(NSUUID().uuidString)"
+        
+    }
+
+    func createRequest1(param : [String: Any] , strURL : String) -> NSURLRequest {
+
+        let boundary = generateBoundaryString()
+
+        let url = NSURL(string: strURL)
+        let request = NSMutableURLRequest(url: url! as URL)
+
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+        request.httpBody = createBodyWithParameters(parameters: param, boundary: boundary)
+        NSURLConnection.sendAsynchronousRequest(request as URLRequest, queue: .main, completionHandler: {(request, data, error) in
+            guard let data = data else { return }
+            let responseString: String = String(data: data, encoding: .utf8)!
+            self.showAlert()
+            print("my_log" + responseString)
+        })
+        return request
+    }
+
+    
+    // - MARK: Send images with parameters
+    
 
 //    func checkPermissions() {
 //        if PHPhotoLibrary.authorizationStatus() != PHAuthorizationStatus.authorized {
@@ -215,54 +231,6 @@ class ReceiptViewController: UIViewController, UICollectionViewDelegateFlowLayou
 //            print("We don't use access to your Photos")
 //        }
 //    }
-    
-//    func uploadImage(paramName: [String:String], fileName: String, image: UIImage) {
-//        let url = URL(string: "http://slomat2.colibri.tj/recipes/store")
-//        print(url)
-//
-//        // generate boundary string using a unique per-app string
-//        let boundary = UUID().uuidString
-//
-//        let session = URLSession.shared
-//
-//        // Set the URLRequest to POST and to the specified URL
-//        var urlRequest = URLRequest(url: url!)
-//        urlRequest.httpMethod = "POST"
-//
-//        // Set Content-Type Header to multipart/form-data, this is equivalent to submitting form data with file upload in a web browser
-//        // And the boundary is also set here
-//        urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-//
-//        var data = Data()
-//        //image = imagesArray
-//        // Add the image data to the raw http request data
-//        data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
-//        data.append("Content-Disposition: form-data; name=\"\(paramName)\"; filename=\"\(fileName)\"\r\n".data(using: .utf8)!)
-//        data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
-////        for var i in 1...imagesArray.count {
-////            data.append(imagesArray[i].pngData()!)
-////            i += 1
-////        }
-//        data.append(image.pngData()!)
-//
-//        data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
-//
-//        // Send a POST request to the URL, with the data we created earlier
-//        session.uploadTask(with: urlRequest, from: data, completionHandler: { responseData, response, error in
-//            if error == nil {
-//                let jsonData = try? JSONSerialization.jsonObject(with: responseData!, options: .allowFragments)
-//                if let json = jsonData as? [String: Any] {
-//                    print(json)
-//                }
-//            }
-//            else {
-//                print(error)
-//            }
-//        }).resume()
-//    }
-
-//
-
 }
 extension ReceiptViewController: UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -300,10 +268,8 @@ extension ReceiptViewController: UICollectionViewDelegate, UICollectionViewDataS
             
         case UICollectionView.elementKindSectionFooter:
             let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: ReceiptCollectionReusableView.identifier, for: indexPath) as! ReceiptCollectionReusableView
-            if footer.phoneTextField.text != "" && footer.nameTextField.text != "" && footer.commentTextField.text != ""{
-                footer.button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
-            }
-            footer.button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+            footer.configureConstraints()
+            footer.images = imagesArray
             return footer
             
         default:
@@ -338,86 +304,8 @@ extension ReceiptViewController: UICollectionViewDelegate, UICollectionViewDataS
     @objc func empty() {
         
     }
-    
-    func imageUploadRequest(imageView imageView: UIImage, uploadUrl: NSURL, param: [String:String]?) {
-        
-        //let myUrl = NSURL(string: "http://192.168.1.103/upload.photo/index.php");
-        
-        let request = NSMutableURLRequest(url: uploadUrl as URL);
-        request.httpMethod = "POST"
-        
-        let boundary = generateBoundaryString()
-        
-        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        
-        let imageData = imageView.jpegData(compressionQuality: 1)
-        
-        if(imageData==nil)  { return; }
-        
-        request.httpBody = createBodyWithParameters(parameters: param, filePathKey: "file", imageDataKey: imageData! as NSData, boundary: boundary) as Data
-        
-        //myActivityIndicator.startAnimating();
-        
-        let task =  URLSession.shared.dataTask(with: request as URLRequest,
-                                               completionHandler: {
-            (data, response, error) -> Void in
-            if let data = data {
-                
-                // You can print out response object
-                print("******* response = \(response)")
-                
-                // print(data.length)
-                // you can use data here
-                
-                // Print out reponse body
-                let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
-                print("****** response data = \(responseString!)")
-                
-                let json =  try! JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? NSDictionary
-                
-                print("json value \(json)")
-                
-                
-            } else if let error = error {
-                //print(error.description)
-            }
-        })
-        task.resume()
-    }
-
 
     // extension for impage uploading
-    
-    func createBodyWithParameters(parameters: [String: String]?, filePathKey: String?, imageDataKey: NSData, boundary: String) -> NSData {
-        let body = NSMutableData();
-        
-        if parameters != nil {
-            for (key, value) in parameters! {
-                body.appendString(string: "--\(boundary)\r\n")
-                body.appendString(string: "Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
-                body.appendString(string: "\(value)\r\n")
-            }
-        }
-        
-        let filename = "user-profile.jpg"
-        
-        let mimetype = "image/jpg"
-        
-        body.appendString(string: "--\(boundary)\r\n")
-        body.appendString(string: "Content-Disposition: form-data; name=\"\(filePathKey!)\"; filename=\"\(filename)\"\r\n")
-        body.appendString(string: "Content-Type: \(mimetype)\r\n\r\n")
-        body.append(imageDataKey as Data)
-        body.appendString(string: "\r\n")
-        
-        body.appendString(string: "--\(boundary)--\r\n")
-        
-        return body
-    }
-    
-    func generateBoundaryString() -> String {
-        return "Boundary-\(NSUUID().uuidString)"
-    }
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedimage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             imagesArray += [pickedimage]

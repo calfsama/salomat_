@@ -8,11 +8,16 @@
 import UIKit
 import CoreData
 
+protocol UpdatePrice: class {
+    func update(price: Double, amount: Double)
+}
+
 class CartViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     var basketCollectionView = CartCollectionView()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var network = NetworkService()
     var data = [Basket]()
+    var clous: Double?
     var commitPredicate: NSPredicate?
     
     lazy var promocode: UITextField = {
@@ -58,16 +63,17 @@ class CartViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         super.viewDidLoad()
         title = "Корзина"
         view.backgroundColor = .white
+       
         self.navigationController?.navigationBar.tintColor = UIColor(red: 0.282, green: 0.224, blue: 0.765, alpha: 1)
         hideKeyboardWhenTappedAround()
         basketCollectionView.delegate = self
         basketCollectionView.dataSource = self
-        view.setNeedsDisplay()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadArticles()
+        NotificationCenter.default.post(name: NSNotification.Name("loadList"), object: nil)
         if data.count == 0 {
             configure()
             button.removeFromSuperview()
@@ -75,6 +81,19 @@ class CartViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         else if data.count != 0{
             configureConstraints()
         }
+        
+        let total = {()  in
+            var total = 0.0
+            if self.data.count > 0 {
+                for index in 0...self.data.count - 1 {
+                    total += (Double(self.data[index].price ?? "") ?? 0) * (Double(self.data[index].amount!) ?? 0)
+                }
+                self.clous = total
+                print(total, "=", self.clous)
+            }
+        }
+        total()
+        print("total()",total())
     }
     
     func configure() {
@@ -154,6 +173,7 @@ extension CartViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.price.text = String(format: "%.2f", (Double(data[indexPath.row].amount ?? "") ?? 0) * (Double(data[indexPath.row].price ?? "") ?? 0)) + " сом"
         cell.ml.text = "50 мл"
         cell.art.text = "Арт. 10120"
+        cell.updatePrices = self
         cell.stepperValue.text = data[indexPath.row].amount ?? ""
         cell.id = data[indexPath.row].id ?? ""
         cell.removeProductButton.layer.setValue(indexPath.row, forKey: "index")
@@ -175,7 +195,7 @@ extension CartViewController: UICollectionViewDelegate, UICollectionViewDataSour
              
          case UICollectionView.elementKindSectionFooter:
             let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: BasketFooterCollectionReusableView.identifier, for: indexPath) as! BasketFooterCollectionReusableView
-            footer.cost.text = String(format: "%.2f", calculateCartTotalWithoutDelivery()) + " сом"
+            footer.cost.text = String(format: "%.2f", clous!) + " сом"
             footer.delivery.text = "5.00" + " сом"
             footer.totalCost.text = String(format: "%.2f", calculateCartTotalWithDelivery()) + " сом"
             footer.configure()
@@ -232,4 +252,17 @@ extension CartViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
     }
 }
+extension CartViewController: UpdatePrice {
+    func update(price: Double, amount: Double) {
+        var total = 0.0
+        if self.data.count > 0 {
+            for _ in 0...self.data.count - 1 {
+                total += price * amount
+                clous = total
+                print(total, "price")
+            }
+        }
+    }
+}
+
 

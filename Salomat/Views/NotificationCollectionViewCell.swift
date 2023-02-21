@@ -45,6 +45,7 @@ class NotificationCollectionViewCell: UICollectionViewCell {
         subtitle.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         subtitle.numberOfLines = 0
         subtitle.text = "Мы это молодая перспективная аптека, работающая на стыке сферы информационных технологий и фармацевтики. Наша интернет-аптека это большой выбор медикаментов (более 5000 видов), товаров для здоровья и красоты; это онлайн - сервис по предоставлению интересующей информации о препаратах; это возможность найти, сравнить цены и конечно же выгодно приобрести нужные вам лекарства не выходя из дома или офиса!"
+        subtitle.lineBreakMode = .byWordWrapping
         subtitle.translatesAutoresizingMaskIntoConstraints = false
         return subtitle
     }()
@@ -53,22 +54,7 @@ class NotificationCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         configureConstraints()
     }
-    
-//    func mix(){
-//        if image.image == nil {
-//            configure()
-//        }
-//        else {
-//            configureConstraints()
-//        }
-//    }
-    
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-           let targetSize = CGSize(width: layoutAttributes.frame.width, height: 0)
-           layoutAttributes.frame.size = contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
-           return layoutAttributes
-       }
-    
+        
     func configure() {
        // contentView.addSubview(uiscrollView)
         contentView.addSubview(title)
@@ -95,21 +81,29 @@ class NotificationCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(title)
         contentView.addSubview(subtitle)
         
+    
+        
         
         NSLayoutConstraint.activate([
             image.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             image.widthAnchor.constraint(equalToConstant: contentView.frame.size.width - 32),
-            image.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+//            image.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             image.heightAnchor.constraint(equalToConstant: 250),
+            image.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            image.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
             title.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 10),
             title.widthAnchor.constraint(equalToConstant: contentView.frame.size.width - 32),
             title.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            title.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            title.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
             subtitle.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 10),
             subtitle.widthAnchor.constraint(equalToConstant: contentView.frame.size.width - 32),
-            subtitle.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            subtitle.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+//            subtitle.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            subtitle.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            subtitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            subtitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
         
         ])
     }

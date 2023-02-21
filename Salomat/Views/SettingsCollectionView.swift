@@ -83,9 +83,9 @@ extension SettingsCollectionView: UICollectionViewDelegate, UICollectionViewData
             self.navigationController.pushViewController(vc, animated: true)
         }
         else if indexPath.row == 2 {
-//            let vc = NotificationsViewController()
-//            vc.title = "Уведомления и новости"
-//            self.navigationController.pushViewController(vc, animated: true)
+            let vc = NotificationsViewController()
+            vc.title = "Уведомления и новости"
+            self.navigationController.pushViewController(vc, animated: true)
         }
         else if indexPath.row == 3 {
             let vc = Expanding()

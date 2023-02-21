@@ -8,6 +8,7 @@
 import UIKit
 import CoreData
 
+
 class CartCollectionViewCell: UICollectionViewCell {
     static let identifier = "BasketCollectionViewCell"
     var dataModel = [Basket]()
@@ -21,6 +22,8 @@ class CartCollectionViewCell: UICollectionViewCell {
     var priceLabel = ""
     var commitPredicate: NSPredicate?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    weak var updatePrices: UpdatePrice?
     
     lazy var image: UIImageView = {
         let image = UIImageView()
@@ -167,6 +170,7 @@ class CartCollectionViewCell: UICollectionViewCell {
         if self.stepper.value >= 1 {
             let productPrice = Double(self.prices)
             price.text = String(format: "%.2f", productPrice! * Double(stepperValue.text!)!) + " сом"
+            updatePrices?.update(price: productPrice ?? 0, amount: Double(stepperValue.text!) ?? 0)
             updateAmount()
         }
     }
@@ -175,3 +179,5 @@ class CartCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+

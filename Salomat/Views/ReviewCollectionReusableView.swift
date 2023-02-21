@@ -97,7 +97,7 @@ class ReviewCollectionReusableView: UICollectionReusableView {
     
     lazy var share: UIButton = {
         let button = UIButton()
-        button.setTitle( "Отправить", for: .normal)
+        button.setTitle("Отправить", for: .normal)
         button.setTitleColor( UIColor(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         button.layer.cornerRadius = 4
@@ -184,7 +184,7 @@ class ReviewCollectionReusableView: UICollectionReusableView {
     }
     
     @objc func shareReview() {
-        guard let url = URL(string: "http://slomat2.colibri.tj/products/send_review") else { return }
+        guard let url = URL(string: "http://374315-ca17278.tmweb.ru/products/send_review") else { return }
         var request = URLRequest(url: url)
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
@@ -207,7 +207,7 @@ class ReviewCollectionReusableView: UICollectionReusableView {
                 let response = response as? HTTPURLResponse,
                 error == nil
                     
-            else {                                                                //check for fundamental networking error
+            else {
                 print("error", error ?? URLError(.badServerResponse))
                 return
             }

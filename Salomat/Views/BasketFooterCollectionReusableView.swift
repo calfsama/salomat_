@@ -6,9 +6,14 @@
 //
 
 import UIKit
+import CoreData
+
+
 
 class BasketFooterCollectionReusableView: UICollectionReusableView {
     static let identifier = "BasketFooterCollectionReusableView"
+    var data = [Basket]()
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     lazy var textField: UITextField = {
         let textField = UITextField()
@@ -118,7 +123,42 @@ class BasketFooterCollectionReusableView: UICollectionReusableView {
         return label
     }()
     
+    @objc func loadList(notification: NSNotification) {
+        var total = 0.0
+        if self.data.count > 0 {
+            for index in 0...self.data.count - 1 {
+                total += (Double(data[index].price ?? "") ?? 0) * (Double(data[index].amount!) ?? 0)
+                cost.text = String(format: "%.2f", total) + " сом"
+                print(total, "totalfooter")
+            }
+        }
+    }
+    func calculateCartTotalWithoutDelivery() -> Double{
+        var total = 0.0
+        if self.data.count > 0 {
+            for index in 0...self.data.count - 1 {
+                total += (Double(data[index].price ?? "") ?? 0) * (Double(data[index].amount!) ?? 0)
+            }
+        }
+        return total
+    }
+    
+    func loadArticles() {
+        let request: NSFetchRequest <Basket> = Basket.fetchRequest()
+        do {
+            data = try context.fetch(request)
+        }catch {
+            print("Error fetching data from context \(error)")
+        }
+    }
+    
     public func configure() {
+//        NotificationCenter.default.post(name: NSNotification.Name("loadList"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(loadList), name:NSNotification.Name(rawValue: "loadList"), object: nil)
+        
+        loadArticles()
+     
         addSubview(uiView2)
         uiView2.addSubview(costOfGoods)
         uiView2.addSubview(costOfDelivery)

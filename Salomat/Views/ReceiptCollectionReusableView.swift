@@ -9,10 +9,12 @@ import UIKit
 import MobileCoreServices
 import UniformTypeIdentifiers
 
+
 class ReceiptCollectionReusableView: UICollectionReusableView {
     static let identifier = "ReceiptCollectionReusableView"
     var messangerButton = MessangerCollectionView()
     var imagesArray = [String]()
+    var images = [UIImage]()
     
     lazy var button: UIButton = {
         let button = UIButton()
@@ -21,6 +23,7 @@ class ReceiptCollectionReusableView: UICollectionReusableView {
         button.setTitle("Отправить рецепт", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         button.layer.cornerRadius = 4
+        button.addTarget(self, action: #selector(show), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -115,14 +118,94 @@ class ReceiptCollectionReusableView: UICollectionReusableView {
         return textField
     }()
     
+    lazy var alertView: UIView = {
+        let alert = UIView()
+        alert.backgroundColor = .white
+        alert.translatesAutoresizingMaskIntoConstraints = false
+        return alert
+    }()
+    
+    lazy var titleLabel: UILabel = {
+        var titleLabel = UILabel()
+        titleLabel.text = "Рецепт отправлен"
+        titleLabel.textAlignment = .center
+        titleLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        return titleLabel
+    }()
+    lazy var image: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "done")
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
+    lazy var alertButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("На главную", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        button.layer.cornerRadius = 4
+        button.layer.masksToBounds = true
+        button.backgroundColor = UIColor(red: 0.118, green: 0.745, blue: 0.745, alpha: 1)
+        button.setTitleColor(.white, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(dismissAlert), for: .touchUpInside)
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         messangerButton.set(cell: Messenger.items())
-        configureConstraints()
+      
+        
+        if phoneTextField.text != "" && nameTextField.text != "" {
+            button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        }
     }
     
-    func configureConstraints() {
+    @objc func show() {
+        showAlert()
+    }
+    
+    func showAlert() {
+        addSubview(alertView)
+        alertView.layer.cornerRadius = 12
+        alertView.layer.borderColor = UIColor(red: 0.118, green: 0.745, blue: 0.745, alpha: 1).cgColor
+        alertView.layer.borderWidth = 0.5
+        alertView.addSubview(titleLabel)
+        alertView.addSubview(image)
+        alertView.addSubview(alertButton)
         
+        // Constraints
+        
+        NSLayoutConstraint.activate([
+            alertView.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -10),
+            alertView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            alertView.heightAnchor.constraint(equalToConstant: 200),
+            alertView.widthAnchor.constraint(equalToConstant: 170),
+            image.topAnchor.constraint(equalTo: alertView.topAnchor, constant: 30),
+            image.centerXAnchor.constraint(equalTo: alertView.centerXAnchor),
+            image.heightAnchor.constraint(equalToConstant: 70),
+            image.widthAnchor.constraint(equalToConstant: 70),
+            titleLabel.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 10),
+            titleLabel.leadingAnchor.constraint(equalTo: alertView.leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -16),
+            alertButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            alertButton.leadingAnchor.constraint(equalTo: alertView.leadingAnchor, constant: 16),
+            alertButton.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -16),
+            alertButton.heightAnchor.constraint(equalToConstant: 35),
+        ])
+    }
+    
+    @objc func dismissAlert() {
+        self.alertView.removeFromSuperview()
+        let reg = MainTabBarViewController()
+        let appDelegate = UIApplication.shared.delegate
+        appDelegate?.window??.rootViewController = reg
+    }
+
+    func configureConstraints() {
+       // addSubview(alertView)
         addSubview(phoneTextField)
         addSubview(nameTextField)
         addSubview(commentTextField)
@@ -183,138 +266,74 @@ class ReceiptCollectionReusableView: UICollectionReusableView {
     
     // - MARK: POST REQUEST
     
-    func createRequest(phone: String, name: String, comment: String) throws -> URLRequest {
-        let parameters = [
-            "recipe_phone"  : phone,
-            "recipe_name"    : name,
-            "recipe_comment" : comment]
-        
-        let boundary = generateBoundaryString()
-        
-        let url = URL(string: "http://374315-ca17278.tmweb.ru/recipes/store")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        
-        let fileURL = Bundle.main.url(forResource: "image 3", withExtension: "png")!
-        request.httpBody = try createBody(with: parameters, filePathKey: "file", urls: [fileURL], boundary: boundary)
-        
-        return request
-    }
-    
-    @objc func sendRequest() {
-        let request: URLRequest
-
-        do {
-            request = try createRequest(phone: phoneTextField.text!, name: nameTextField.text!, comment: commentTextField.text!)
-        } catch {
-            print(error)
-            return
-        }
-
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
-                // handle error here
-                print(error ?? "Unknown error")
-                return
-            }
-        }
-        task.resume()
-    }
-    
-    /// Create body of the `multipart/form-data` request
-    ///
-    /// - parameter parameters:   The optional dictionary containing keys and values to be passed to web service.
-    /// - parameter filePathKey:  The optional field name to be used when uploading files. If you supply paths, you must supply filePathKey, too.
-    /// - parameter urls:         The optional array of file URLs of the files to be uploaded.
-    /// - parameter boundary:     The `multipart/form-data` boundary.
-    ///
-    /// - returns:                The `Data` of the body of the request.
-    
-    private func createBody(with parameters: [String: String]? = nil, filePathKey: String, urls: [URL], boundary: String) throws -> Data {
-        var body = Data()
-        
-        parameters?.forEach { (key, value) in
-            body.append("--\(boundary)\r\n")
-            body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
-            body.append("\(value)\r\n")
-        }
-        
-        for url in urls {
-            let filename = url.lastPathComponent
-            let data = try Data(contentsOf: url)
-            
-            body.append("--\(boundary)\r\n")
-            body.append("Content-Disposition: form-data; name=\"\(filePathKey)\"; filename=\"\(filename)\"\r\n")
-            body.append("Content-Type: \(url.mimeType)\r\n\r\n")
-            body.append(data)
-            body.append("\r\n")
-        }
-        
-        body.append("--\(boundary)--\r\n")
-        return body
-    }
-    
-    /// Create boundary string for multipart/form-data request
-    ///
-    /// - returns:            The boundary string that consists of "Boundary-" followed by a UUID string.
-    
-    private func generateBoundaryString() -> String {
-        return "Boundary-\(UUID().uuidString)"
-    }
-    
-    
-    // - MARK: OLD
-    
-    @objc func postRequestButton() {
-        let url = URL(string: "http://374315-ca17278.tmweb.ru/users/check_phone")!
-        var request = URLRequest(url: url)
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.httpMethod = "POST"
+    @objc func didTapButton() {
+        print("pressed1")
         let parameters: [String: Any] = [
-            "recipe_phone": "\(phoneTextField.text)",
-            "recipe_name": "\(nameTextField.text)",
-            "recipe_comment": "\(commentTextField.text)",
-            "recipe_pics": ""
+            "recipe_phone": phoneTextField.text!,
+            "recipe_name": nameTextField.text!,
+            "recipe_comment": commentTextField.text!,
+            "recipe_pics": images
         ]
-        request.httpBody = parameters.percentEncoded()
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard
-                let data = data,
-                let response = response as? HTTPURLResponse,
-                error == nil
-            else {                                                               // check for fundamental networking error
-                print("error", error ?? URLError(.badServerResponse))
-                return
-            }
-            
-            guard (200 ... 299) ~= response.statusCode else {                    // check for http errors
-                print("statusCode should be 2xx, but is \(response.statusCode)")
-                print("response = \(response)")
-                return
-            }
-            
-            // do whatever you want with the `data`, e.g.:
-            
-            do {
-                let responseObject = try JSONDecoder().decode(CheckPhone.self, from: data)
-                print(responseObject)
-            } catch {
-                print(error) // parsing error
-                
-                if let responseString = String(data: data, encoding: .utf8) {
-                    print("responseString = \(responseString)")
-                } else {
-                    print("unable to parse response as string")
+        let urlStr = "http://374315-ca17278.tmweb.ru/recipes/store"
+        createRequest1(param: parameters, strURL: urlStr)
+    }
+    
+    func createBodyWithParameters(parameters: [String: Any],boundary: String) -> Data {
+        let body = NSMutableData()
+
+        if parameters != nil {
+            for (key, value) in parameters {
+
+                if(value is String || value is NSString){
+                    body.appendString(string: "--\(boundary)\r\n")
+                    body.appendString(string: "Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+                    body.appendString(string: "\(value)\r\n")
+                }
+                else if(value is [UIImage]){
+                    var i = 0;
+                    for image in value as! [UIImage]{
+                        let filename = "image\(i).jpg"
+                        let data = image.jpegData(compressionQuality: 1);
+                        let mimetype = "image/jpeg"
+
+                        body.appendString(string: "--\(boundary)\r\n")
+                        body.appendString(string: "Content-Disposition: form-data; name=\"\(key)\"; filename=\"\(filename)\"\r\n")
+                        body.appendString(string: "Content-Type: \(mimetype)\r\n\r\n")
+                        body.append(data!)
+                        body.appendString(string: "\r\n")
+                        i += 1
+                    }
                 }
             }
         }
-        
-        task.resume()
+        body.appendString(string: "--\(boundary)--\r\n")
+        return body as Data
     }
-    
+
+    func generateBoundaryString() -> String {
+        return "Boundary-\(NSUUID().uuidString)"
+        
+    }
+
+    func createRequest1(param : [String: Any] , strURL : String) -> NSURLRequest {
+
+        let boundary = generateBoundaryString()
+
+        let url = NSURL(string: strURL)
+        let request = NSMutableURLRequest(url: url! as URL)
+
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+        request.httpBody = createBodyWithParameters(parameters: param, boundary: boundary)
+        NSURLConnection.sendAsynchronousRequest(request as URLRequest, queue: .main, completionHandler: {(request, data, error) in
+            guard let data = data else { return }
+            let responseString: String = String(data: data, encoding: .utf8)!
+            self.showAlert()
+            print("my_log" + responseString)
+        })
+        return request
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -347,6 +366,7 @@ extension Data {
         }
     }
 }
+
 
 
 
